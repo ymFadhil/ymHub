@@ -183,7 +183,7 @@ if (!isset($base_path)) {
                     </div>
                 </a>
 
-                <!-- Project 3: Booking System -->
+                <!-- Project 3: POS System -->
                 <a href="<?php 
                     // Get the current directory structure to detect subdirectory
                     $current_dir = dirname($_SERVER['PHP_SELF']);

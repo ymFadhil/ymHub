@@ -687,9 +687,16 @@ section:last-of-type {
 
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
     margin-top: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
 }
 
 .portfolio-item {
@@ -701,7 +708,7 @@ section:last-of-type {
     border: 1px solid var(--border-color);
     display: block;
     color: inherit;
-    min-height: 500px;
+    min-height: 580px;
 }
 
 .portfolio-item:hover {
@@ -711,7 +718,7 @@ section:last-of-type {
 }
 
 .portfolio-image {
-    height: 200px;
+    height: 280px;
     background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     display: flex;
     align-items: center;
@@ -719,6 +726,7 @@ section:last-of-type {
     font-size: 4rem;
     color: white;
     overflow: hidden;
+    position: relative;
     /* Ensure image zoom stays within bounds if radius is strictly here */
 }
 
@@ -745,7 +753,7 @@ section:last-of-type {
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    min-height: calc(500px - 200px);
+    min-height: calc(500px - 280px);
 }
 
 .portfolio-content h3 {
