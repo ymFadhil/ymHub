@@ -114,9 +114,9 @@ if (!isset($base_path)) {
                     
                     // Construct path based on language
                     if (isset($lang)) {
-                        echo $prefix . '/' . $lang . '/ecommerce';
+                        echo $prefix . '/' . $lang . '/ecommerce.php';
                     } else {
-                        echo $prefix . '/bm/ecommerce'; // default
+                        echo $prefix . '/bm/ecommerce.php'; // default
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
@@ -148,9 +148,9 @@ if (!isset($base_path)) {
                     
                     // Construct path based on language
                     if (isset($lang)) {
-                        echo $prefix . '/' . $lang . '/professional-website';
+                        echo $prefix . '/' . $lang . '/professional-website.php';
                     } else {
-                        echo $prefix . '/bm/professional-website'; // default
+                        echo $prefix . '/bm/professional-website.php'; // default
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
@@ -192,9 +192,9 @@ if (!isset($base_path)) {
                     
                     // Construct path based on language
                     if (isset($lang)) {
-                        echo $prefix . '/' . $lang . '/single-page';
+                        echo $prefix . '/' . $lang . '/single-page.php';
                     } else {
-                        echo $prefix . '/bm/single-page'; // default
+                        echo $prefix . '/bm/single-page.php'; // default
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
