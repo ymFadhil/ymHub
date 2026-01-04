@@ -114,24 +114,24 @@ if (!isset($base_path)) {
                     
                     // Construct path based on language
                     if (isset($lang)) {
-                        echo $prefix . '/' . $lang . '/admin-system';
+                        echo $prefix . '/' . $lang . '/ecommerce';
                     } else {
-                        echo $prefix . '/bm/admin-system'; // default
+                        echo $prefix . '/bm/ecommerce'; // default
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
-                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/admin_dashboard_preview.png" alt="Admin System Dashboard" class="portfolio-img-cover">
+                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/ecommerce_dashboard_preview.png" alt="E-commerce Website" class="portfolio-img-cover">
                     </div>
                     <div class="portfolio-content">
-                        <h3><?php echo $lang == 'en' ? 'Admin System + Report' : 'Sistem Admin + Laporan'; ?></h3>
-                        <p class="portfolio-problem"><strong><?php echo $lang == 'en' ? 'Problem:' : 'Masalah:'; ?></strong> <?php echo $lang == 'en' ? 'Data scattered in Excel / WhatsApp, hard to manage and track.' : 'Data berselerak dalam Excel / WhatsApp, sukar untuk diurus dan dikesan.'; ?></p>
-                        <p class="portfolio-solution"><strong><?php echo $lang == 'en' ? 'Solution:' : 'Penyelesaian:'; ?></strong> <?php echo $lang == 'en' ? 'A web-based admin system to manage company data and generate reports efficiently.' : 'Sistem admin berasaskan web untuk mengurus data syarikat dan menjana laporan dengan cekap.'; ?></p>
+                        <h3><?php echo $lang == 'en' ? 'E-commerce Website' : 'Website E-dagang'; ?></h3>
+                        <p class="portfolio-problem"><strong><?php echo $lang == 'en' ? 'Problem:' : 'Masalah:'; ?></strong> <?php echo $lang == 'en' ? 'Businesses struggle to sell products online manually, leading to order errors, inventory confusion, and lost sales opportunities.' : 'Perniagaan sukar menjual produk secara online secara manual, menyebabkan kesilapan pesanan, kekeliruan inventori, dan kehilangan peluang jualan.'; ?></p>
+                        <p class="portfolio-solution"><strong><?php echo $lang == 'en' ? 'Solution:' : 'Penyelesaian:'; ?></strong> <?php echo $lang == 'en' ? 'A complete e-commerce website with shopping cart, secure payment gateway, order management, and inventory tracking.' : 'Website e-dagang lengkap dengan shopping cart, gerbang pembayaran selamat, pengurusan pesanan, dan penjejakan inventori.'; ?></p>
                         <div class="portfolio-features">
-                            <span class="portfolio-tag"><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Login & User Role' : 'Log Masuk & Peranan Pengguna'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'CRUD Data' : 'Data CRUD'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Filter by Date/Status' : 'Tapis mengikut Tarikh/Status'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Export Excel/PDF' : 'Eksport Excel/PDF'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Dashboard' : 'Papan Pemuka'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-shopping-cart"></i> <?php echo $lang == 'en' ? 'Shopping Cart System' : 'Sistem Troli Beli-belah'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-credit-card"></i> <?php echo $lang == 'en' ? 'Payment Gateway (FPX/Cards)' : 'Tempat Pembayaran (FPX/Kad)'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-box"></i> <?php echo $lang == 'en' ? 'Product & Inventory Management' : 'Pengurusan Produk & Inventori'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-clipboard-list"></i> <?php echo $lang == 'en' ? 'Order Management System' : 'Sistem Pengurusan Pesanan'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-user"></i> <?php echo $lang == 'en' ? 'Customer Account Portal' : 'Portal Akaun Pelanggan'; ?></span>
                         </div>
                         <div class="portfolio-cta">
                             <i class="fas fa-arrow-right"></i> <?php echo $lang == 'en' ? 'View Details' : 'Lihat Butiran'; ?>
@@ -183,7 +183,7 @@ if (!isset($base_path)) {
                     </div>
                 </a>
 
-                <!-- Project 3: POS System -->
+                <!-- Project 3: Single Page Website -->
                 <a href="<?php 
                     // Get the current directory structure to detect subdirectory
                     $current_dir = dirname($_SERVER['PHP_SELF']);
@@ -192,33 +192,33 @@ if (!isset($base_path)) {
                     
                     // Construct path based on language
                     if (isset($lang)) {
-                        echo $prefix . '/' . $lang . '/booking-system';
+                        echo $prefix . '/' . $lang . '/single-page';
                     } else {
-                        echo $prefix . '/bm/booking-system'; // default
+                        echo $prefix . '/bm/single-page'; // default
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
-                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/pos_system_preview.png" alt="POS System" class="portfolio-img-cover">
+                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/single_page_preview.png" alt="Single Page Website" class="portfolio-img-cover">
                     </div>
                     <div class="portfolio-content">
-                        <h3><?php echo $lang == 'en' ? 'POS System' : 'Sistem POS'; ?></h3>
+                        <h3><?php echo $lang == 'en' ? 'Single Page Website' : 'Single Page Website'; ?></h3>
 
                         <p class="portfolio-problem">
                             <strong><?php echo $lang == 'en' ? 'Problem:' : 'Masalah:'; ?></strong> 
-                            <?php echo $lang == 'en' ? 'Customer orders and transactions are hard to manage manually, causing errors and lost sales.' : 'Pesanan dan transaksi pelanggan sukar diurus secara manual, menyebabkan kesilapan dan kehilangan jualan.'; ?>
+                            <?php echo $lang == 'en' ? 'Businesses need a simple, focused website to promote specific products, services, or events without the complexity of a full multi-page site.' : 'Perniagaan memerlukan website yang ringkas dan fokus untuk mempromosikan produk, servis, atau event tertentu tanpa kerumitan laman web berbilang halaman.'; ?>
                         </p>
 
                         <p class="portfolio-solution">
                             <strong><?php echo $lang == 'en' ? 'Solution:' : 'Penyelesaian:'; ?></strong> 
-                            <?php echo $lang == 'en' ? 'A simple and efficient POS system to manage orders, track sales, and generate reports seamlessly.' : 'Sistem POS yang mudah dan efisien untuk mengurus pesanan, menjejaki jualan, dan menjana laporan dengan lancar.'; ?>
+                            <?php echo $lang == 'en' ? 'A single page website that is simple, fast, and focused on your main goal. Perfect for product launches, event registrations, or service promotions.' : 'Single page website yang ringkas, cepat, dan fokus kepada tujuan utama anda. Sesuai untuk pelancaran produk, pendaftaran event, atau promosi servis.'; ?>
                         </p>
 
                         <div class="portfolio-features">
-                            <span class="portfolio-tag"><i class="fas fa-cash-register"></i> <?php echo $lang == 'en' ? 'Sales & Order Management' : 'Pengurusan Jualan & Pesanan'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-users"></i> <?php echo $lang == 'en' ? 'Customer Management' : 'Pengurusan Pelanggan'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-receipt"></i> <?php echo $lang == 'en' ? 'Invoice & Receipt Generation' : 'Penjanaan Invois & Resit'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-chart-line"></i> <?php echo $lang == 'en' ? 'Sales Reports' : 'Laporan Jualan'; ?></span>
-                            <span class="portfolio-tag"><i class="fas fa-bell"></i> <?php echo $lang == 'en' ? 'Notifications & Alerts' : 'Notifikasi & Amaran'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-mobile-alt"></i> <?php echo $lang == 'en' ? 'Responsive Website Design' : 'Rekabentuk Web Responsive'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-search"></i> <?php echo $lang == 'en' ? 'Basic SEO Optimization' : 'Optimaal Enjin Carian (SEO) Asas'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-file-alt"></i> <?php echo $lang == 'en' ? '1 Online Form' : '1 Borang Online'; ?></span>
+                            <span class="portfolio-tag"><i class="fab fa-whatsapp"></i> <?php echo $lang == 'en' ? 'WhatsApp Button' : 'Butang WhatsApp'; ?></span>
+                            <span class="portfolio-tag"><i class="fas fa-share-alt"></i> <?php echo $lang == 'en' ? 'Social Media Integration' : 'Integrasi Media Sosial'; ?></span>
                         </div>
                         <div class="portfolio-cta">
                             <i class="fas fa-arrow-right"></i> <?php echo $lang == 'en' ? 'View Details' : 'Lihat Butiran'; ?>
@@ -430,7 +430,7 @@ if (!isset($base_path)) {
                         <p class="package-desc"><?php echo $lang == 'en' ? 'Single Page Website perfect for promoting specific products or services, or for event registration. Simple, fast, and focused on your main goal.' : 'Single Page Website sesuai untuk anda yang nak buat website untuk promosi produk atau servis tertentu, atau untuk daftar event. Website ni ringkas, cepat, dan fokus kepada tujuan utama anda.'; ?></p>
                         <ul class="package-features-simple">
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? '1 Page' : '1 Halaman'; ?></li>
-                            <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Responsive Web Design' : 'Rekabentuk Web Responsive'; ?></li>
+                            <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Responsive Website Design' : 'Rekabentuk Web Responsive'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Basic SEO Optimization' : 'Optimaal Enjin Carian (SEO) Asas'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? '1 Online Form' : '1 Borang Online'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'WhatsApp Button' : 'Butang WhatsApp'; ?></li>
@@ -484,7 +484,7 @@ if (!isset($base_path)) {
                             <li><i class="fas fa-calendar-check"></i> <?php echo $lang == 'en' ? 'Automated Booking System' : 'Sistem Tempahan Automatik'; ?></li>
                             <li><i class="fas fa-credit-card"></i> <?php echo $lang == 'en' ? 'Payment Gateway Integration' : 'Integrasi Gerbang Pembayaran'; ?></li>
                             <li><i class="fas fa-bell"></i> <?php echo $lang == 'en' ? 'Email & WhatsApp Notifications' : 'Notifikasi Emel & WhatsApp'; ?></li>
-                            <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Responsive Web Design' : 'Rekabentuk Web Responsive'; ?></li>
+                            <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Responsive Website Design' : 'Rekabentuk Web Responsive'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Basic SEO Optimization' : 'Optimaal Enjin Carian (SEO) Asas'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Google Analytics' : 'Google Analytics'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Admin Dashboard for Management' : 'Papan Pemuka Admin untuk Pengurusan'; ?></li>
@@ -533,7 +533,7 @@ if (!isset($base_path)) {
                         <ul class="package-features-simple">
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Up to 30 Products/Services (Initial)' : 'Sehingga 30 Produk / Servis (Permulaan)'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Online Payment Gateway - FPX / Credit Card' : 'Online Payment Gateway - FPX / Kad Kredit'; ?></li>
-                            <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Responsive Web Design' : 'Rekabentuk Web Responsive'; ?></li>
+                            <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Responsive Website Design' : 'Rekabentuk Web Responsive'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'Basic SEO Optimization' : 'Optimaal Enjin Carian (SEO) Asas'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? '1 Online Form' : '1 Borang Online'; ?></li>
                             <li><i class="fas fa-check"></i> <?php echo $lang == 'en' ? 'WhatsApp Button' : 'Butang WhatsApp'; ?></li>

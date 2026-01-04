@@ -38,7 +38,7 @@ $custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/booking-syste
                 </div>
                 <div class="info-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: transform 0.2s ease, box-shadow 0.2s ease;">
                     <h3 style="color: var(--text-dark); margin-bottom: 0.5rem; font-size: 1.1rem;"><i class="fas fa-dollar-sign" style="color: var(--primary-color); margin-right: 0.5rem;"></i> Anggaran Harga</h3>
-                    <p style="color: var(--text-gray); margin: 0; font-size: 1rem;">RM1,500 - RM4,500</p>
+                    <p style="color: var(--text-gray); margin: 0; font-size: 1rem;">RM 2,250 - RM 3,375</p>
                 </div>
             </div>
 

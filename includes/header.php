@@ -59,34 +59,42 @@ if (!isset($base_path)) {
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="<?php 
-                // Get the current directory structure to detect subdirectory
-                $current_dir = dirname($_SERVER['PHP_SELF']);
-                $has_ymhub = strpos($current_dir, '/ymhub') !== false;
-                $prefix = $has_ymhub ? '/ymhub' : '';
-                
-                // Determine language path based on $lang variable (most reliable)
-                if (isset($lang) && $lang == 'en') {
-                    echo $prefix . '/en/';
-                } elseif (isset($lang) && $lang == 'bm') {
-                    echo $prefix . '/bm/';
-                } elseif ($base_path == '/en') {
-                    echo $prefix . '/en/';
-                } elseif ($base_path == '/bm') {
-                    echo $prefix . '/bm/';
-                } else {
-                    echo $prefix . '/bm/'; // default
-                }
-            ?>" class="nav-brand">
+            <?php
+            // Get the current directory structure to detect subdirectory
+            $current_dir = dirname($_SERVER['PHP_SELF']);
+            $has_ymhub = strpos($current_dir, '/ymhub') !== false;
+            $prefix = $has_ymhub ? '/ymhub' : '';
+            
+            // Determine language path based on $lang variable (most reliable)
+            $home_url = '';
+            if (isset($lang) && $lang == 'en') {
+                $home_url = $prefix . '/en/';
+            } elseif (isset($lang) && $lang == 'bm') {
+                $home_url = $prefix . '/bm/';
+            } elseif ($base_path == '/en') {
+                $home_url = $prefix . '/en/';
+            } elseif ($base_path == '/bm') {
+                $home_url = $prefix . '/bm/';
+            } else {
+                $home_url = $prefix . '/bm/'; // default
+            }
+            
+            // Determine if we're on a project detail page (not index)
+            $is_project_page = basename($_SERVER['PHP_SELF']) != 'index.php' && basename($_SERVER['PHP_SELF']) != 'index';
+            
+            // Get the base URL for navigation links
+            $nav_base = $is_project_page ? $home_url : '';
+            ?>
+            <a href="<?php echo $home_url; ?>" class="nav-brand">
                 <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/logo-ym-success.png" alt="YM Success Logo" class="logo-img">
             </a>
             <ul class="nav-menu">
-                <li><a href="#home"><?php echo $L['nav_home']; ?></a></li>
-                <li><a href="#services"><?php echo $L['nav_services']; ?></a></li>
-                <li><a href="#portfolio"><?php echo $L['nav_portfolio']; ?></a></li>
-                <li><a href="#how-it-works"><?php echo $L['nav_how_it_works']; ?></a></li>
-                <li><a href="#packages"><?php echo $L['nav_packages']; ?></a></li>
-                <li><a href="#contact"><?php echo $L['nav_contact']; ?></a></li>
+                <li><a href="<?php echo $nav_base; ?>#home"><?php echo $L['nav_home']; ?></a></li>
+                <li><a href="<?php echo $nav_base; ?>#services"><?php echo $L['nav_services']; ?></a></li>
+                <li><a href="<?php echo $nav_base; ?>#portfolio"><?php echo $L['nav_portfolio']; ?></a></li>
+                <li><a href="<?php echo $nav_base; ?>#how-it-works"><?php echo $L['nav_how_it_works']; ?></a></li>
+                <li><a href="<?php echo $nav_base; ?>#packages"><?php echo $L['nav_packages']; ?></a></li>
+                <li><a href="<?php echo $nav_base; ?>#contact"><?php echo $L['nav_contact']; ?></a></li>
             </ul>
             <div class="nav-right">
                 <div class="lang-switch">

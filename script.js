@@ -16,17 +16,51 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
 });
 
 // Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('a[href*="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        const href = this.getAttribute('href');
+        const hashIndex = href.indexOf('#');
+        
+        // If link contains a path before the hash, check if it's a different page
+        if (hashIndex > 0) {
+            const pathPart = href.substring(0, hashIndex);
+            const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+            
+            // If path is different or not empty, let browser navigate normally
+            if (pathPart && pathPart !== currentPath && pathPart !== '') {
+                // Link is to a different page, let browser handle navigation
+                return true;
+            }
+        }
+        
+        // If it's just an anchor on the same page, handle smooth scroll
+        if (hashIndex >= 0) {
+            const hash = href.substring(hashIndex);
+            const target = document.querySelector(hash);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
+});
+
+// Scroll to anchor on page load if URL contains hash
+window.addEventListener('load', function() {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            setTimeout(() => {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    }
 });
 
 // Navbar background on scroll
