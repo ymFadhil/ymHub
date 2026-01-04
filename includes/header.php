@@ -60,6 +60,11 @@ if (!isset($base_path)) {
     <nav class="navbar">
         <div class="container">
             <?php
+            // Ensure $base_url is available (from config.php via lang.php)
+            if (!isset($base_url)) {
+                require_once __DIR__ . '/../config.php';
+            }
+            
             // Get the current directory structure to detect subdirectory
             $current_dir = dirname($_SERVER['PHP_SELF']);
             $has_ymhub = strpos($current_dir, '/ymhub') !== false;
@@ -68,15 +73,15 @@ if (!isset($base_path)) {
             // Determine language path based on $lang variable (most reliable)
             $home_url = '';
             if (isset($lang) && $lang == 'en') {
-                $home_url = $prefix . '/en/';
+                $home_url = $base_url . '/en/';
             } elseif (isset($lang) && $lang == 'bm') {
-                $home_url = $prefix . '/bm/';
+                $home_url = $base_url . '/bm/';
             } elseif ($base_path == '/en') {
-                $home_url = $prefix . '/en/';
+                $home_url = $base_url . '/en/';
             } elseif ($base_path == '/bm') {
-                $home_url = $prefix . '/bm/';
+                $home_url = $base_url . '/bm/';
             } else {
-                $home_url = $prefix . '/bm/'; // default
+                $home_url = $base_url . '/bm/'; // default
             }
             
             // Determine if we're on a project detail page (not index)

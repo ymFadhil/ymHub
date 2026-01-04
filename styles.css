@@ -758,7 +758,7 @@ section:last-of-type {
 .portfolio-img-cover {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.5s ease;
     border-radius: 12px;
     position: relative;

@@ -1,4 +1,7 @@
 <?php
+// Include config for base URL
+require_once __DIR__ . '/config.php';
+
 // Language Detection
 $current_path = $_SERVER['REQUEST_URI'];
 $lang = 'bm'; // Default language
@@ -155,10 +158,13 @@ $L = $lang == 'en' ? $lang_en : $lang_bm;
 $lang_bm_url = '/bm/';
 $lang_en_url = '/en/';
 
-// Base URL
-$base_url = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
-$base_url = rtrim($base_url, '/');
-if (empty($base_url)) $base_url = '';
+// Base URL - only set if not already set from config.php
+if (!isset($base_url)) {
+    // Fallback: construct from PHP_SELF (old method, kept for backward compatibility)
+    $base_url = str_replace('/index.php', '', $_SERVER['PHP_SELF']);
+    $base_url = rtrim($base_url, '/');
+    if (empty($base_url)) $base_url = '';
+}
 
 // Current page path (without language prefix)
 function getCurrentPath($lang) {

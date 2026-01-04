@@ -19,7 +19,7 @@ $custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/single-page.p
     <!-- Project Detail Section -->
     <section class="project-detail" style="padding: 150px 0 100px;">
         <div class="container">
-            <a href="/ymhub/bm/#portfolio" class="back-link" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary-color); text-decoration: none; margin-bottom: 2rem;">
+            <a href="<?php echo $base_url; ?>/bm/#portfolio" class="back-link" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary-color); text-decoration: none; margin-bottom: 2rem;">
                 <i class="fas fa-arrow-left"></i> Kembali
             </a>
             
