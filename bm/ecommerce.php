@@ -14,8 +14,8 @@ $host = $_SERVER['HTTP_HOST'];
 $current_dir = dirname($_SERVER['PHP_SELF']);
 $has_ymhub = strpos($current_dir, '/ymhub') !== false;
 $prefix = $has_ymhub ? '/ymhub' : '';
-$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/ecommerce.php';
-$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/ecommerce.php';
+$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/ecommerce';
+$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/ecommerce';
 ?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
 

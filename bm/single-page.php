@@ -11,8 +11,8 @@ $domain = (strpos($host, 'ymhub.com') !== false || strpos($host, 'localhost') !=
 $current_dir = dirname($_SERVER['PHP_SELF']);
 $has_ymhub = strpos($current_dir, '/ymhub') !== false;
 $prefix = $has_ymhub ? '/ymhub' : '';
-$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/single-page.php';
-$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/single-page.php';
+$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/single-page';
+$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/single-page';
 ?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
 

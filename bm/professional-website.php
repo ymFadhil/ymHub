@@ -11,8 +11,8 @@ $domain = (strpos($host, 'ymhub.com') !== false || strpos($host, 'localhost') !=
 $current_dir = dirname($_SERVER['PHP_SELF']);
 $has_ymhub = strpos($current_dir, '/ymhub') !== false;
 $prefix = $has_ymhub ? '/ymhub' : '';
-$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/booking-system.php';
-$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/booking-system.php';
+$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/profesional-website';
+$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/profesional-website';
 ?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
 
