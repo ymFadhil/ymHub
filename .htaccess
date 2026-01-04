@@ -4,6 +4,7 @@ RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/.* /api/router.php [L,NC,QSA]
 
 # Ensure Authorization header reaches PHP (for Bearer tokens)
 SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
@@ -13,3 +14,11 @@ RewriteRule ^ %1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*?)/?$ $1.php [NC,L]
+
+# Custom error pages
+ErrorDocument 400 /app/Error/400
+ErrorDocument 401 /app/Error/401
+ErrorDocument 403 /app/Error/403
+ErrorDocument 404 /app/Error/404
+ErrorDocument 500 /app/Error/500
+ErrorDocument 504 /app/Error/504
