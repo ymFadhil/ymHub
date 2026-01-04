@@ -11,8 +11,8 @@ $domain = (strpos($host, 'ymhub.com') !== false || strpos($host, 'localhost') !=
 $current_dir = dirname($_SERVER['PHP_SELF']);
 $has_ymhub = strpos($current_dir, '/ymhub') !== false;
 $prefix = $has_ymhub ? '/ymhub' : '';
-$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/maintenance-system.php';
-$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/maintenance-system.php';
+$custom_hreflang_ms = $protocol . '://' . $domain . $prefix . '/bm/booking-system.php';
+$custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/booking-system.php';
 ?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
 
@@ -85,10 +85,17 @@ $custom_hreflang_en = $protocol . '://' . $domain . $prefix . '/en/maintenance-s
                     </div>
                 </div>
 
-                <div class="screenshots-section" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); margin-bottom: 2rem;">
-                    <h2 style="color: var(--text-dark); margin-bottom: 1.5rem; font-size: 1.5rem;">Screenshots</h2>
-                    <p style="color: var(--text-light); text-align: center; padding: 3rem;">
-                        <i class="fas fa-image" style="font-size: 3rem; color: var(--text-light); margin-bottom: 1rem; display: block;"></i>
+                <div class="screenshots-section" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); margin-bottom: 2rem; text-align: center;">
+                    <h2 style="color: var(--text-dark); margin-bottom: 1.5rem; font-size: 1.5rem;">Web Design</h2>
+                    <!-- Replace 'your-image.jpg' with your actual image path -->
+                    <img src="../assets/backgroud_picture/booking_system_preview.png" alt="Paparan Skrin" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 1.5rem 0;">
+                    
+                    <img src="../assets/backgroud_picture/booking_system_preview1.png" alt="Paparan Skrin" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 1.5rem 0;">
+                    
+                    <img src="../assets/backgroud_picture/booking_system_preview2.png" alt="Paparan Skrin" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                    <p style="color: var(--text-gray); margin-top: 1rem;">
                         Screenshots of the professional design and booking interface will be displayed here.
                     </p>
                 </div>

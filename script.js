@@ -68,34 +68,34 @@ const formMessage = document.getElementById('form-message');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(contactForm);
         const submitButton = contactForm.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.innerHTML;
-        
+
         // Disable submit button
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        
+
         try {
             // Get the correct path to send_email.php
             const formAction = contactForm.getAttribute('action');
             let emailEndpoint = formAction || 'send_email.php';
-            
+
             // Fix the path if it doesn't end with .php
             if (emailEndpoint.includes('send_email') && !emailEndpoint.endsWith('.php')) {
                 emailEndpoint = emailEndpoint.replace('send_email', 'send_email.php');
             }
-            
+
             const response = await fetch(emailEndpoint, {
                 method: 'POST',
                 body: formData
             });
-            
+
             // Parse JSON response
             const contentType = response.headers.get('content-type');
             let result;
-            
+
             if (contentType && contentType.includes('application/json')) {
                 result = await response.json();
             } else {
@@ -106,14 +106,14 @@ if (contactForm) {
                     throw new Error(text || 'Invalid response from server');
                 }
             }
-            
+
             // Show notification modal
             showNotification(result.success, result.message || 'Message sent successfully!');
-            
+
             if (result.success) {
                 contactForm.reset();
             }
-            
+
         } catch (error) {
             showNotification(false, error.message || 'Error sending message. Please try again.');
             console.error('Error:', error);
@@ -131,14 +131,14 @@ function showNotification(success, message) {
     if (existing) {
         existing.remove();
     }
-    
+
     // Create notification modal
     const modal = document.createElement('div');
     modal.id = 'notification-modal';
     modal.className = success ? 'notification success' : 'notification error';
-    
+
     const icon = success ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-exclamation-circle"></i>';
-    
+
     modal.innerHTML = `
         <div class="notification-content">
             <div class="notification-icon">${icon}</div>
@@ -148,14 +148,14 @@ function showNotification(success, message) {
             </button>
         </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
+
     // Show animation
     setTimeout(() => {
         modal.classList.add('show');
     }, 10);
-    
+
     // Auto remove after 5 seconds for success, 7 seconds for error
     setTimeout(() => {
         modal.classList.remove('show');
@@ -328,13 +328,13 @@ let parallaxElements = document.querySelectorAll('.parallax, .package-visual');
 
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
-    
+
     parallaxElements.forEach(element => {
         if (element) {
             const rate = scrolled * 0.5;
             const rect = element.getBoundingClientRect();
             const elementTop = rect.top + window.pageYOffset;
-            
+
             if (scrolled + window.innerHeight > elementTop && scrolled < elementTop + rect.height) {
                 element.style.transform = `translateY(${rate * 0.1}px)`;
             }
@@ -347,26 +347,26 @@ function createParticles() {
     const particlesContainer = document.createElement('div');
     particlesContainer.className = 'particles';
     document.body.appendChild(particlesContainer);
-    
+
     const particleCount = 50;
-    
+
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
-        
+
         const size = Math.random() * 4 + 2;
         const x = Math.random() * 100;
         const y = Math.random() * 100;
         const delay = Math.random() * 15;
         const duration = Math.random() * 10 + 10;
-        
+
         particle.style.width = size + 'px';
         particle.style.height = size + 'px';
         particle.style.left = x + '%';
         particle.style.top = y + '%';
         particle.style.animationDelay = delay + 's';
         particle.style.animationDuration = duration + 's';
-        
+
         particlesContainer.appendChild(particle);
     }
 }
@@ -385,7 +385,7 @@ const scrollObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             setTimeout(() => {
                 entry.target.classList.add('animated');
-                
+
                 // Add specific animation classes based on element
                 if (entry.target.classList.contains('skill-card')) {
                     entry.target.style.animation = 'scaleIn 0.6s ease forwards';
@@ -434,7 +434,7 @@ document.querySelectorAll('.package-detail-wrapper').forEach(package => {
 document.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX / window.innerWidth;
     const mouseY = e.clientY / window.innerHeight;
-    
+
     // Apply subtle parallax to portfolio items
     document.querySelectorAll('.portfolio-item').forEach((item, index) => {
         const speed = (index % 3) * 0.5;
@@ -447,7 +447,7 @@ function animateCounter(element, target, duration = 2000) {
     const start = 0;
     const increment = target / (duration / 16);
     let current = start;
-    
+
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -468,7 +468,7 @@ const enhancedStatObserver = new IntersectionObserver((entries) => {
             const isPercentage = text.includes('%');
             const number = parseInt(text.replace(/\D/g, ''));
             const suffix = text.replace(/\d/g, '');
-            
+
             let current = 0;
             const increment = number / 60;
             const timer = setInterval(() => {
@@ -495,7 +495,7 @@ function staggerAnimation(elements, delay = 100) {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'all 0.6s ease';
-            
+
             setTimeout(() => {
                 el.style.opacity = '1';
                 el.style.transform = 'translateY(0)';
@@ -515,7 +515,7 @@ document.querySelectorAll('.package-features-list li, .package-features-visual .
             }
         });
     }, { threshold: 0.2 });
-    
+
     if (items.length > 0) {
         observer.observe(items[0].parentElement);
     }
@@ -539,15 +539,15 @@ document.addEventListener('mousemove', (e) => {
         trail.style.zIndex = '9999';
         trail.style.transition = 'opacity 0.3s ease';
         document.body.appendChild(trail);
-        
+
         cursorTrail.push(trail);
-        
+
         if (cursorTrail.length > maxTrailLength) {
             const oldTrail = cursorTrail.shift();
             oldTrail.style.opacity = '0';
             setTimeout(() => oldTrail.remove(), 300);
         }
-        
+
         setTimeout(() => {
             trail.style.opacity = '0';
             setTimeout(() => trail.remove(), 300);
@@ -581,13 +581,13 @@ document.querySelectorAll('section').forEach(section => {
 
 // Button Ripple Effect
 document.querySelectorAll('.btn, .btn-contact-us, .btn-package').forEach(button => {
-    button.addEventListener('click', function(e) {
+    button.addEventListener('click', function (e) {
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
-        
+
         ripple.style.width = ripple.style.height = size + 'px';
         ripple.style.left = x + 'px';
         ripple.style.top = y + 'px';
@@ -597,11 +597,11 @@ document.querySelectorAll('.btn, .btn-contact-us, .btn-package').forEach(button 
         ripple.style.transform = 'scale(0)';
         ripple.style.animation = 'ripple 0.6s ease-out';
         ripple.style.pointerEvents = 'none';
-        
+
         this.style.position = 'relative';
         this.style.overflow = 'hidden';
         this.appendChild(ripple);
-        
+
         setTimeout(() => ripple.remove(), 600);
     });
 });
@@ -626,3 +626,12 @@ window.addEventListener('load', () => {
         document.body.style.opacity = '1';
     }, 100);
 });
+
+function openModal(src) {
+    document.getElementById('imageModal').style.display = 'flex';
+    document.getElementById('modalImg').src = src;
+}
+
+function closeModal() {
+    document.getElementById('imageModal').style.display = 'none';
+}

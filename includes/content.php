@@ -120,7 +120,7 @@ if (!isset($base_path)) {
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
-                        <i class="fas fa-database"></i>
+                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/admin_dashboard_preview.png" alt="Admin System Dashboard" class="portfolio-img-cover">
                     </div>
                     <div class="portfolio-content">
                         <h3><?php echo $lang == 'en' ? 'Admin System + Report' : 'Sistem Admin + Laporan'; ?></h3>
@@ -148,13 +148,13 @@ if (!isset($base_path)) {
                     
                     // Construct path based on language
                     if (isset($lang)) {
-                        echo $prefix . '/' . $lang . '/maintenance-system';
+                        echo $prefix . '/' . $lang . '/professional-website';
                     } else {
-                        echo $prefix . '/bm/maintenance-system'; // default
+                        echo $prefix . '/bm/professional-website'; // default
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
-                        <i class="fas fa-calendar-check"></i>
+                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/booking_system_preview.png" alt="Professional Website & Booking System" class="portfolio-img-cover">
                     </div>
                     <div class="portfolio-content">
                         <h3><?php echo $lang == 'en' ? 'Professional Website & Booking System' : 'Website Profesional & Sistem Tempahan'; ?></h3>
@@ -198,7 +198,7 @@ if (!isset($base_path)) {
                     }
                 ?>" class="portfolio-item portfolio-link">
                     <div class="portfolio-image">
-                        <i class="fas fa-calendar-check"></i>
+                        <img src="<?php echo $base_path == '/bm' || $base_path == '/en' ? '..' : ''; ?>/assets/backgroud_picture/pos_system_preview.png" alt="POS System" class="portfolio-img-cover">
                     </div>
                     <div class="portfolio-content">
                         <h3><?php echo $lang == 'en' ? 'POS System' : 'Sistem POS'; ?></h3>
