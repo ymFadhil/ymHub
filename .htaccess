@@ -1,32 +1,16 @@
-# =========================
-# .htaccess untuk multi-level folder + remove .php
-# =========================
-
-# Aktifkan mod_rewrite
+# Enable rewrite engine
 RewriteEngine On
 RewriteBase /ymhub/
 
-# -------------------------
-# 1️⃣ Biarkan kalau file/folder wujud
-# -------------------------
+# Biarkan jika file/folder wujud
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# -------------------------
-# 2️⃣ Tambah .php automatik untuk clean URL
-# -------------------------
+# Tambah .php automatik
 RewriteCond %{DOCUMENT_ROOT}/ymhub/$1.php -f
-RewriteRule ^(.*)/?$ $1.php [L]
+RewriteRule ^(.*)/?$ $1.php [L,QSA,L]
 
-# -------------------------
-# 3️⃣ Redirect dari .php ke clean URL
-# -------------------------
+# Redirect .php ke clean URL
 RewriteCond %{THE_REQUEST} \s([^.]+)\.php[?\s] [NC]
 RewriteRule ^ %1 [R=301,L]
-
-# -------------------------
-# Optional: Force trailing slash for directories (better SEO)
-# -------------------------
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.+[^/])$ /$1/ [R=301,L]
