@@ -1,0 +1,19 @@
+# Enable symlinks (LiteSpeed sometimes needs this)
+Options +FollowSymLinks
+
+# Aktifkan mod_rewrite
+RewriteEngine On
+RewriteBase /bm/
+
+# Jangan rewrite kalau file/folder wujud
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Auto tambahkan .php jika wujud
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)/?$ $1.php [L,QSA]
+
+# Redirect .php ke clean URL
+RewriteCond %{THE_REQUEST} \s([^.]+)\.php[?\s] [NC]
+RewriteRule ^ %1 [R=301,L]
