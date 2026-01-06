@@ -7,7 +7,7 @@ Options +FollowSymLinks
 RewriteEngine On
 
 # Gantikan ikut root folder awak di URL
-RewriteBase /ymhub/
+RewriteBase /public_html/
 
 # -----------------------------
 # 2️⃣ Jika file/folder wujud, jangan rewrite
@@ -24,10 +24,3 @@ RewriteRule ^(.*)/?$ $1.php [L,QSA]
 # 4️⃣ Redirect .php ke clean URL
 RewriteCond %{THE_REQUEST} \s([^.]+)\.php[?\s] [NC]
 RewriteRule ^ %1 [R=301,L]
-
-# -----------------------------
-# 5️⃣ Optional: clear LSCache untuk dev
-# Kalau masih 404, buat ini sekali je
-# <IfModule LiteSpeed>
-# CacheDisable public
-# </IfModule>
