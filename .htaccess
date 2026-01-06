@@ -1,14 +1,15 @@
-# Aktifkan mod_rewrite
 RewriteEngine On
+RewriteBase /ymhub/
 
-# Kalau file/folder wujud, biarkan terus
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# Jika file/folder wujud, biarkan
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# Tambah .php secara automatik
-RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^(.*)$ $1.php [L]
+# Tambah .php untuk multi-level folder (termasuk bm/ atau en/)
+RewriteCond %{DOCUMENT_ROOT}/ymhub/$1.php -f
+RewriteRule ^(.*)/?$ $1.php [L]
 
-# Redirect URL yang ada .php ke versi tanpa extension (SEO friendly)
+# Optional: redirect dari .php ke tanpa extension
 RewriteCond %{THE_REQUEST} \s([^.]+)\.php[?\s] [NC]
 RewriteRule ^ %1 [R=301,L]
