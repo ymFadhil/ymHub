@@ -1,11 +1,14 @@
+# Aktifkan mod_rewrite
 RewriteEngine On
 
-# 1️⃣ Redirect .php → clean URL (bm & en)
-RewriteCond %{THE_REQUEST} \s/+((bm|en)/[^\s]+)\.php[\s?] [NC]
-RewriteRule ^ /%1 [R=301,L]
-
-# 2️⃣ Clean URL → php file
-RewriteCond %{REQUEST_FILENAME} !-d
+# Kalau file/folder wujud, biarkan terus
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Tambah .php secara automatik
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^(.+)$ $1.php [L]
+RewriteRule ^(.*)$ $1.php [L]
+
+# Redirect URL yang ada .php ke versi tanpa extension (SEO friendly)
+RewriteCond %{THE_REQUEST} \s([^.]+)\.php[?\s] [NC]
+RewriteRule ^ %1 [R=301,L]
