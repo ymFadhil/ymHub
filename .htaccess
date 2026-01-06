@@ -1,19 +1,33 @@
-# Enable symlinks (needed for some servers / LiteSpeed)
+# -----------------------------
+# 0️⃣ Enable symlinks (LiteSpeed sometimes needs this)
 Options +FollowSymLinks
 
-# Enable rewrite engine
+# -----------------------------
+# 1️⃣ Aktifkan mod_rewrite
 RewriteEngine On
+
+# Gantikan ikut root folder awak di URL
 RewriteBase /ymhub/
 
-# Biarkan jika file/folder wujud
+# -----------------------------
+# 2️⃣ Jika file/folder wujud, jangan rewrite
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Tambah .php automatik
-RewriteCond %{DOCUMENT_ROOT}/ymhub/$1.php -f
-RewriteRule ^(.*)/?$ $1.php [L,QSA,L]
+# -----------------------------
+# 3️⃣ Auto tambahkan .php jika wujud
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)/?$ $1.php [L,QSA]
 
-# Redirect .php ke clean URL
+# -----------------------------
+# 4️⃣ Redirect .php ke clean URL
 RewriteCond %{THE_REQUEST} \s([^.]+)\.php[?\s] [NC]
 RewriteRule ^ %1 [R=301,L]
+
+# -----------------------------
+# 5️⃣ Optional: clear LSCache untuk dev
+# Kalau masih 404, buat ini sekali je
+# <IfModule LiteSpeed>
+# CacheDisable public
+# </IfModule>
