@@ -7,6 +7,7 @@ RewriteEngine On
 # Enable PHP processing for sitemap.xml (try multiple methods for compatibility)
 <Files "sitemap.xml">
     SetHandler application/x-httpd-php
+    AddType application/x-httpd-php .xml
 </Files>
 
 # Alternative: Rewrite sitemap.xml to sitemap.php if sitemap.php exists

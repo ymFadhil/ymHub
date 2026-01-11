@@ -1,7 +1,11 @@
 <?php
 // Sitemap.xml generator for SEO
-// This file generates a sitemap dynamically based on the current domain
+// Start output buffering immediately to prevent whitespace
+if (!ob_get_level()) {
+    ob_start();
+}
 
+// Set proper headers
 header('Content-Type: application/xml; charset=utf-8');
 
 // Detect protocol and domain
@@ -14,8 +18,8 @@ $current_dir = dirname($_SERVER['PHP_SELF']);
 $has_ymhub = strpos($current_dir, '/ymhub') !== false;
 $prefix = $has_ymhub ? '/ymhub' : '';
 
-// Base URL
-$base_url = $protocol . '://' . $domain . $prefix;
+// Base URL - ensure it doesn't end with slash if prefix is empty
+$base_url = rtrim($protocol . '://' . $domain . $prefix, '/');
 
 // Current date for lastmod
 $lastmod = date('Y-m-d');
@@ -26,11 +30,11 @@ $pages = [
     ['url' => '/bm/', 'priority' => '1.0', 'changefreq' => 'weekly'],
     ['url' => '/en/', 'priority' => '1.0', 'changefreq' => 'weekly'],
     
-    // Service pages - E-commerce (important for "create website", "custom website" keywords)
+    // Service pages - E-commerce
     ['url' => '/bm/ecommerce', 'priority' => '0.8', 'changefreq' => 'monthly'],
     ['url' => '/en/ecommerce', 'priority' => '0.8', 'changefreq' => 'monthly'],
     
-    // Service pages - Professional Website & Booking System (important for "custom sistem" keywords)
+    // Service pages - Professional Website & Booking System
     ['url' => '/bm/professional-website', 'priority' => '0.8', 'changefreq' => 'monthly'],
     ['url' => '/en/professional-website', 'priority' => '0.8', 'changefreq' => 'monthly'],
     
@@ -39,33 +43,43 @@ $pages = [
     ['url' => '/en/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
 ];
 
-// Generate XML
+// Generate XML - must start with XML declaration
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
-echo '        xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
 
 foreach ($pages as $page) {
-    $full_url = $base_url . $page['url'];
+    // Ensure URL is properly formatted
+    $url_path = $page['url'];
+    $full_url = $base_url . $url_path;
+    
     echo "  <url>\n";
     echo "    <loc>" . htmlspecialchars($full_url, ENT_XML1, 'UTF-8') . "</loc>\n";
     echo "    <lastmod>" . $lastmod . "</lastmod>\n";
-    echo "    <changefreq>" . $page['changefreq'] . "</changefreq>\n";
-    echo "    <priority>" . $page['priority'] . "</priority>\n";
+    echo "    <changefreq>" . htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
+    echo "    <priority>" . htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
     
     // Add hreflang alternates for multilingual pages
-    if (strpos($page['url'], '/bm/') !== false) {
-        $en_url = str_replace('/bm/', '/en/', $page['url']);
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($base_url . $page['url'], ENT_XML1, 'UTF-8') . "\" />\n";
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($base_url . $en_url, ENT_XML1, 'UTF-8') . "\" />\n";
-    } elseif (strpos($page['url'], '/en/') !== false) {
-        $bm_url = str_replace('/en/', '/bm/', $page['url']);
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($base_url . $bm_url, ENT_XML1, 'UTF-8') . "\" />\n";
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($base_url . $page['url'], ENT_XML1, 'UTF-8') . "\" />\n";
+    if (strpos($url_path, '/bm/') !== false) {
+        $en_url = str_replace('/bm/', '/en/', $url_path);
+        $bm_full_url = $base_url . $url_path;
+        $en_full_url = $base_url . $en_url;
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+    } elseif (strpos($url_path, '/en/') !== false) {
+        $bm_url = str_replace('/en/', '/bm/', $url_path);
+        $bm_full_url = $base_url . $bm_url;
+        $en_full_url = $base_url . $url_path;
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
     }
     
     echo "  </url>\n";
 }
 
 echo '</urlset>';
-?>
 
+// Flush output
+if (ob_get_level()) {
+    ob_end_flush();
+}
+?>
