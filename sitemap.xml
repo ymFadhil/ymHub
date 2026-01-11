@@ -1,5 +1,10 @@
 <?php
 // Sitemap.xml generator for SEO
+// Clean any existing output and start buffering
+if (ob_get_level()) {
+    ob_end_clean();
+}
+ob_start();
 header('Content-Type: application/xml; charset=utf-8');
 
 // Detect protocol and domain
@@ -30,9 +35,9 @@ $pages = [
     ['url' => '/en/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
 ];
 
-// Generate XML
-echo '<?'.'xml version="1.0" encoding="UTF-8"?>' . "\n";
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+// Generate XML - output XML declaration properly
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n";
 
 foreach ($pages as $page) {
     $url_path = $page['url'];
@@ -63,3 +68,5 @@ foreach ($pages as $page) {
 }
 
 echo '</urlset>';
+// Flush output
+ob_end_flush();
