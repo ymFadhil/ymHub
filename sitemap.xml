@@ -1,10 +1,9 @@
 <?php
 // Sitemap.xml generator for SEO
-// Set proper headers first
 header('Content-Type: application/xml; charset=utf-8');
 
 // Detect protocol and domain
-$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'];
 $domain = (strpos($host, 'ymhub.com') !== false || strpos($host, 'localhost') !== false) ? 'ymhub.com' : $host;
 
@@ -31,23 +30,21 @@ $pages = [
     ['url' => '/en/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
 ];
 
-// Generate XML - output directly without buffering
-echo '<?xml version="1.0" encoding="UTF-8"?>';
-echo "\n";
-echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">';
-echo "\n";
+// Generate XML
+echo '<?'.'xml version="1.0" encoding="UTF-8"?>' . "\n";
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
 
 foreach ($pages as $page) {
     $url_path = $page['url'];
     $full_url = $base_url . $url_path;
-    
+
     echo "  <url>\n";
     echo "    <loc>" . htmlspecialchars($full_url, ENT_XML1, 'UTF-8') . "</loc>\n";
     echo "    <lastmod>" . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8') . "</lastmod>\n";
     echo "    <changefreq>" . htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
     echo "    <priority>" . htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
-    
-    // Add hreflang alternates for multilingual pages
+
+    // hreflang alternates
     if (strpos($url_path, '/bm/') !== false) {
         $en_url = str_replace('/bm/', '/en/', $url_path);
         $bm_full_url = $base_url . $url_path;
@@ -61,9 +58,8 @@ foreach ($pages as $page) {
         echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
         echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
     }
-    
+
     echo "  </url>\n";
 }
 
 echo '</urlset>';
-?>
