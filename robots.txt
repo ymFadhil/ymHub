@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+# Note: Update these URLs to match your actual domain
+Sitemap: https://ymhub.com/sitemap.xml
+Sitemap: http://ymhub.com/sitemap.xml
+
+# If you're using a subdirectory (like /ymhub), add:
+# Sitemap: https://ymhub.com/ymhub/sitemap.xml
+

@@ -21,7 +21,7 @@ $lang_bm = [
     'nav_packages' => 'Pakej',
     'nav_contact' => 'Hubungi',
     
-    'hero_title' => 'Kami bina sistem web praktikal yang selesaikan masalah bisnes sebenar',
+    'hero_title' => 'Ym Hub membina sistem dan website yang memudahkan urusan bisnes anda',
     'hero_subtitle' => 'PHP • MySQL • Panel Admin • Laporan',
     'hero_btn_discuss' => 'Bincang Projek Anda',
     'hero_btn_quote' => 'Dapatkan Sebut Harga Percuma',
@@ -80,6 +80,23 @@ $lang_bm = [
     'why_3_desc' => 'Kami menghormati tarikh akhir. Anda akan tahu jadual masa terlebih dahulu dan kami akan menghantar seperti yang dijanjikan.',
     'why_4_title' => 'Sokongan Selepas Penghantaran',
     'why_4_desc' => 'Kami tidak hilang selepas penghantaran. Kami menyediakan sokongan untuk membetulkan isu dan membuat penambahbaikan.',
+    
+    'portfolio_page_title' => 'Portfolio | Contoh Kerja Kami',
+    'portfolio_page_description' => 'Lihat contoh kerja dan projek yang telah kami bina. Sistem web custom, e-commerce, booking system dan banyak lagi.',
+    'portfolio_filter_all' => 'Semua Projek',
+    'portfolio_filter_web' => 'Web App',
+    'portfolio_filter_ecommerce' => 'E-commerce',
+    'portfolio_filter_booking' => 'Booking System',
+    'portfolio_view_details' => 'Lihat Butiran',
+    'portfolio_no_projects' => 'Tiada projek ditemui.',
+    
+    'portfolio_contents' => 'KANDUNGAN',
+    'portfolio_introduction' => 'PENGENALAN',
+    'portfolio_achievements' => 'PENCAPAIAN',
+    'portfolio_our_products' => 'PRODUK KAMI',
+    'portfolio_our_services' => 'PERKHIDMATAN KAMI',
+    'portfolio_intro_text' => 'YM Success Enterprise adalah firma teknologi terkemuka yang pakar dalam penyelesaian web terkini untuk landskap digital moden. Pasukan kami komited untuk menyampaikan produk dan perkhidmatan yang luar biasa yang membolehkan perniagaan dan individu berkembang maju dalam dunia teknologi yang sentiasa berkembang.',
+    'portfolio_read_more' => 'Baca Lagi',
 ];
 
 $lang_en = [
@@ -90,7 +107,7 @@ $lang_en = [
     'nav_packages' => 'Packages',
     'nav_contact' => 'Contact',
     
-    'hero_title' => 'We build practical web systems that solve real business problems',
+    'hero_title' => 'Ym Hub builds practical websites and systems that solve real business problems',
     'hero_subtitle' => 'PHP • MySQL • Admin Panels • Reports',
     'hero_btn_discuss' => 'Discuss Your Project',
     'hero_btn_quote' => 'Get Free Quote',
@@ -149,6 +166,23 @@ $lang_en = [
     'why_3_desc' => 'We respect deadlines. You\'ll know the timeline upfront and We\'ll deliver as promised.',
     'why_4_title' => 'Post-Delivery Support',
     'why_4_desc' => 'We don\'t disappear after delivery. We provide support to fix issues and make improvements.',
+    
+    'portfolio_page_title' => 'Portfolio | Our Sample Work',
+    'portfolio_page_description' => 'View our portfolio of custom web systems, e-commerce websites, booking systems and more.',
+    'portfolio_filter_all' => 'All Projects',
+    'portfolio_filter_web' => 'Web App',
+    'portfolio_filter_ecommerce' => 'E-commerce',
+    'portfolio_filter_booking' => 'Booking System',
+    'portfolio_view_details' => 'View Details',
+    'portfolio_no_projects' => 'No projects found.',
+    
+    'portfolio_contents' => 'CONTENTS',
+    'portfolio_introduction' => 'INTRODUCTION',
+    'portfolio_achievements' => 'ACHIEVEMENTS',
+    'portfolio_our_products' => 'OUR PRODUCTS',
+    'portfolio_our_services' => 'OUR SERVICES',
+    'portfolio_intro_text' => 'YM Success Enterprise is a leading technology firm that specializes in cutting-edge web solutions for the modern digital landscape. Our team is committed to delivering exceptional products and services that empower businesses and individuals alike to thrive in the ever-evolving world of technology.',
+    'portfolio_read_more' => 'Read More',
 ];
 
 // Get current language array

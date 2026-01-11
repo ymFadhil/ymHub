@@ -11,6 +11,9 @@ if (!isset($base_path)) {
         <div class="hero-background">
             <div class="hero-bg-image"></div>
             <div class="hero-bg-overlay"></div>
+            <div class="hero-glow glow-1"></div>
+            <div class="hero-glow glow-2"></div>
+            <div class="hero-glow glow-3"></div>
         </div>
         <div class="hero-graphics">
             <div class="graphic-shape shape-1"></div>
@@ -32,17 +35,74 @@ if (!isset($base_path)) {
         </div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title"><?php echo $L['hero_title']; ?></h1>
-                <p class="hero-subtitle"><?php echo $L['hero_subtitle']; ?></p>
+                <!-- Trust Badge -->
+                <div class="hero-badge">
+                    <span class="badge-icon">✨</span>
+                    <span class="badge-text"><?php echo $lang == 'en' ? 'Custom Web Systems Built for Your Business' : 'Sistem Web Khas Dibina untuk Perniagaan Anda'; ?></span>
+                </div>
+                
+                <!-- Main Title with Gradient -->
+                <h1 class="hero-title">
+                    <span class="title-gradient"><?php echo $L['hero_title']; ?></span>
+                </h1>
+                
+                <!-- Subtitle with Tech Stack -->
+                <p class="hero-subtitle">
+                    <span class="subtitle-highlight"><?php echo $L['hero_subtitle']; ?></span>
+                </p>
+                
+                <!-- Quick Stats -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label"><?php echo $lang == 'en' ? 'Custom Built' : 'Dibina Khas'; ?></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label"><?php echo $lang == 'en' ? 'Support' : 'Sokongan'; ?></div>
+                    </div>
+                    
+                </div>
+                
+                <!-- CTA Buttons -->
                 <div class="hero-buttons">
-                    <a href="https://wa.me/60174776935?text=Hi,%20I%20found%20your%20website%20and%20would%20like%20to%20discuss%20a%20web%20system%20project." class="btn btn-primary" target="_blank">
-                        <i class="fab fa-whatsapp"></i> <?php echo $L['hero_btn_discuss']; ?>
+                    <a href="https://wa.me/60174776935?text=Hi,%20I%20found%20your%20website%20and%20would%20like%20to%20discuss%20a%20web%20system%20project." class="btn btn-primary btn-hero-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span><?php echo $L['hero_btn_discuss']; ?></span>
+                        <i class="fas fa-arrow-right btn-arrow"></i>
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <?php echo $L['hero_btn_quote']; ?>
+                    <a href="#contact" class="btn btn-secondary btn-hero-secondary">
+                        <i class="fas fa-envelope"></i>
+                        <span><?php echo $L['hero_btn_quote']; ?></span>
                     </a>
                 </div>
+                
+                <!-- Trust Indicators -->
+                <div class="hero-trust">
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span><?php echo $lang == 'en' ? 'Free Consultation' : 'Perundingan Percuma'; ?></span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span><?php echo $lang == 'en' ? 'No Hidden Costs' : 'Tiada Kos Tersembunyi'; ?></span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span><?php echo $lang == 'en' ? 'Malaysia Based' : 'Berpangkalan di Malaysia'; ?></span>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <!-- Floating Particles -->
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
     </section>
 
@@ -105,7 +165,7 @@ if (!isset($base_path)) {
             <p class="section-subtitle"><?php echo $L['portfolio_subtitle']; ?></p>
             
             <div class="portfolio-grid">
-                <!-- Project 1: Admin System -->
+                <!-- Project 1: E-commerce -->
                 <a href="<?php 
                     // Get the current directory structure to detect subdirectory
                     $current_dir = dirname($_SERVER['PHP_SELF']);

@@ -1,0 +1,71 @@
+<?php
+// Sitemap.xml generator for SEO
+// This file generates a sitemap dynamically based on the current domain
+
+header('Content-Type: application/xml; charset=utf-8');
+
+// Detect protocol and domain
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'];
+$domain = (strpos($host, 'ymhub.com') !== false || strpos($host, 'localhost') !== false) ? 'ymhub.com' : $host;
+
+// Check if we're in a subdirectory (like /ymhub)
+$current_dir = dirname($_SERVER['PHP_SELF']);
+$has_ymhub = strpos($current_dir, '/ymhub') !== false;
+$prefix = $has_ymhub ? '/ymhub' : '';
+
+// Base URL
+$base_url = $protocol . '://' . $domain . $prefix;
+
+// Current date for lastmod
+$lastmod = date('Y-m-d');
+
+// Define pages with their priorities and change frequencies
+$pages = [
+    // Home pages (highest priority)
+    ['url' => '/bm/', 'priority' => '1.0', 'changefreq' => 'weekly'],
+    ['url' => '/en/', 'priority' => '1.0', 'changefreq' => 'weekly'],
+    
+    // Service pages - E-commerce (important for "create website", "custom website" keywords)
+    ['url' => '/bm/ecommerce', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    ['url' => '/en/ecommerce', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    
+    // Service pages - Professional Website & Booking System (important for "custom sistem" keywords)
+    ['url' => '/bm/professional-website', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    ['url' => '/en/professional-website', 'priority' => '0.8', 'changefreq' => 'monthly'],
+    
+    // Service pages - Single Page Website
+    ['url' => '/bm/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
+    ['url' => '/en/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
+];
+
+// Generate XML
+echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
+echo '        xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+
+foreach ($pages as $page) {
+    $full_url = $base_url . $page['url'];
+    echo "  <url>\n";
+    echo "    <loc>" . htmlspecialchars($full_url, ENT_XML1, 'UTF-8') . "</loc>\n";
+    echo "    <lastmod>" . $lastmod . "</lastmod>\n";
+    echo "    <changefreq>" . $page['changefreq'] . "</changefreq>\n";
+    echo "    <priority>" . $page['priority'] . "</priority>\n";
+    
+    // Add hreflang alternates for multilingual pages
+    if (strpos($page['url'], '/bm/') !== false) {
+        $en_url = str_replace('/bm/', '/en/', $page['url']);
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($base_url . $page['url'], ENT_XML1, 'UTF-8') . "\" />\n";
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($base_url . $en_url, ENT_XML1, 'UTF-8') . "\" />\n";
+    } elseif (strpos($page['url'], '/en/') !== false) {
+        $bm_url = str_replace('/en/', '/bm/', $page['url']);
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($base_url . $bm_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($base_url . $page['url'], ENT_XML1, 'UTF-8') . "\" />\n";
+    }
+    
+    echo "  </url>\n";
+}
+
+echo '</urlset>';
+?>
+

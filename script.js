@@ -669,3 +669,266 @@ function openModal(src) {
 function closeModal() {
     document.getElementById('imageModal').style.display = 'none';
 }
+
+// Portfolio Filter Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    const noResults = document.getElementById('noResults');
+    const portfolioGrid = document.getElementById('portfolioGrid');
+
+    if (filterButtons.length > 0 && portfolioCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                const filterValue = this.getAttribute('data-filter');
+                let visibleCount = 0;
+
+                portfolioCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || cardCategory === filterValue) {
+                        card.classList.remove('hidden');
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                if (noResults) {
+                    if (visibleCount === 0) {
+                        noResults.style.display = 'block';
+                        if (portfolioGrid) portfolioGrid.style.display = 'none';
+                    } else {
+                        noResults.style.display = 'none';
+                        if (portfolioGrid) portfolioGrid.style.display = 'grid';
+                    }
+                }
+
+                // Smooth scroll to top of portfolio section
+                const portfolioSection = document.querySelector('.portfolio-page');
+                if (portfolioSection) {
+                    portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    }
+});
+
+// Portfolio Fullscreen Functionality
+function openPortfolioFullscreen() {
+    const modal = document.getElementById('portfolioFullscreen');
+    const fullscreenGrid = document.getElementById('fullscreenGrid');
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    
+    if (modal && fullscreenGrid) {
+        // Clear existing content
+        fullscreenGrid.innerHTML = '';
+        
+        // Clone and add all portfolio cards
+        portfolioCards.forEach(card => {
+            if (!card.classList.contains('hidden')) {
+                const clone = card.cloneNode(true);
+                clone.style.display = 'block';
+                fullscreenGrid.appendChild(clone);
+            }
+        });
+        
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closePortfolioFullscreen() {
+    const modal = document.getElementById('portfolioFullscreen');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Close fullscreen on ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closePortfolioFullscreen();
+    }
+});
+
+// Portfolio Page Navigation Functions
+let currentPageIndex = 0;
+const portfolioPages = ['intro', 'achievements', 'products', 'services'];
+let isFlipbookOpen = false;
+let isFlipping = false;
+
+function openFlipbook() {
+    if (isFlipping || isFlipbookOpen) return;
+    
+    isFlipping = true;
+    const coverPage = document.getElementById('coverPage');
+    const twoPageSpread = document.getElementById('twoPageSpread');
+    const controls = document.getElementById('portfolioControls');
+    
+    if (coverPage && twoPageSpread) {
+        // Show two-page spread first (hidden behind)
+        twoPageSpread.style.display = 'flex';
+        
+        // Start cover flip animation
+        requestAnimationFrame(() => {
+            coverPage.classList.add('flipping');
+        });
+        
+        // After cover flips halfway, start opening two-page spread
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                twoPageSpread.classList.add('opening');
+            });
+        }, 400);
+        
+        // Hide cover and show controls after animation completes
+        setTimeout(() => {
+            coverPage.classList.add('flipped');
+            twoPageSpread.classList.add('open');
+            twoPageSpread.classList.remove('opening');
+            
+            if (controls) {
+                controls.style.display = 'flex';
+                controls.style.opacity = '0';
+                setTimeout(() => {
+                    controls.style.transition = 'opacity 0.5s ease';
+                    controls.style.opacity = '1';
+                }, 100);
+            }
+            
+            isFlipbookOpen = true;
+            isFlipping = false;
+        }, 800);
+    }
+}
+
+function showPage(pageId) {
+    // Hide all right pages
+    document.querySelectorAll('.flipbook-page.right-page').forEach(page => {
+        page.classList.remove('active');
+        page.style.display = 'none';
+    });
+    
+    // Show selected page
+    const targetPage = document.getElementById(pageId + 'Page');
+    if (targetPage) {
+        targetPage.style.display = 'flex';
+        setTimeout(() => {
+            targetPage.classList.add('active');
+        }, 10);
+    }
+    
+    // Update current page index
+    currentPageIndex = portfolioPages.indexOf(pageId);
+    if (currentPageIndex === -1) currentPageIndex = 0;
+}
+
+function nextPage() {
+    currentPageIndex = (currentPageIndex + 1) % portfolioPages.length;
+    showPage(portfolioPages[currentPageIndex]);
+}
+
+function prevPage() {
+    currentPageIndex = (currentPageIndex - 1 + portfolioPages.length) % portfolioPages.length;
+    showPage(portfolioPages[currentPageIndex]);
+}
+
+function firstPage() {
+    currentPageIndex = 0;
+    showPage(portfolioPages[currentPageIndex]);
+}
+
+function lastPage() {
+    currentPageIndex = portfolioPages.length - 1;
+    showPage(portfolioPages[currentPageIndex]);
+}
+
+// Legacy functions for backward compatibility
+function nextPortfolio() {
+    nextPage();
+}
+
+function skipPortfolio() {
+    nextPage();
+}
+
+function togglePortfolioMenu() {
+    const menu = document.getElementById('portfolioMenu');
+    if (menu) {
+        if (menu.style.display === 'none' || !menu.classList.contains('active')) {
+            menu.style.display = 'block';
+            setTimeout(() => {
+                menu.classList.add('active');
+            }, 10);
+        } else {
+            menu.classList.remove('active');
+            setTimeout(() => {
+                menu.style.display = 'none';
+            }, 300);
+        }
+    }
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+    const menu = document.getElementById('portfolioMenu');
+    const menuBtn = document.querySelector('.menu-btn');
+    
+    if (menu && menuBtn && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+        if (menu.classList.contains('active')) {
+            menu.classList.remove('active');
+            setTimeout(() => {
+                menu.style.display = 'none';
+            }, 300);
+        }
+    }
+});
+
+// Auto-rotate portfolio showcase
+let portfolioAutoRotate;
+function startPortfolioAutoRotate() {
+    portfolioAutoRotate = setInterval(() => {
+        nextPortfolio();
+    }, 5000);
+}
+
+function stopPortfolioAutoRotate() {
+    if (portfolioAutoRotate) {
+        clearInterval(portfolioAutoRotate);
+    }
+}
+
+// Initialize portfolio showcase
+document.addEventListener('DOMContentLoaded', function() {
+    const coverPage = document.getElementById('coverPage');
+    const coverBtn = document.querySelector('.cover-fullscreen-btn');
+    
+    // Add click handler to cover page (click anywhere to open)
+    if (coverPage && !coverBtn) {
+        coverPage.addEventListener('click', function(e) {
+            // Don't trigger if clicking the button
+            if (!e.target.closest('.cover-fullscreen-btn')) {
+                openFlipbook();
+            }
+        });
+    }
+    
+    // Keyboard shortcut: Enter or Space to open flipbook
+    document.addEventListener('keydown', function(e) {
+        if (!isFlipbookOpen && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            openFlipbook();
+        }
+    });
+});
