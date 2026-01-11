@@ -2,6 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-# Note: Update these URLs to match your actual domain
 Sitemap: https://ymhubtech.com/sitemap.php
-Sitemap: http://ymhubtech.com/sitemap.php
