@@ -1,27 +1,5 @@
-# Enable symlinks
-Options +FollowSymLinks
-
-# Rewrite engine for clean URLs
+# Enable rewrite engine
 RewriteEngine On
 
-# Enable PHP processing for sitemap.xml (try multiple methods for compatibility)
-<Files "sitemap.xml">
-    SetHandler application/x-httpd-php
-    AddType application/x-httpd-php .xml
-</Files>
-
-# Alternative: Rewrite sitemap.xml to sitemap.php if sitemap.php exists
-# (Uncomment if SetHandler doesn't work on your server)
-# RewriteCond %{REQUEST_URI} ^/sitemap\.xml$ [NC]
-# RewriteCond %{DOCUMENT_ROOT}/sitemap.php -f
-# RewriteRule ^sitemap\.xml$ sitemap.php [L]
-
-# Don't rewrite if file exists
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Redirect root to default language (BM)
-RewriteCond %{REQUEST_URI} ^/$
-RewriteRule ^(.*)$ /bm/ [R=301,L]
-
+# Redirect sitemap.xml to sitemap.php
+RewriteRule ^sitemap\.xml$ /sitemap.php [L]
