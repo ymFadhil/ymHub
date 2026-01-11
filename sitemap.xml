@@ -1,37 +1,19 @@
 <?php
-// Sitemap.xml generator for SEO
-// Turn off all error reporting and clean any output
 error_reporting(0);
 ini_set('display_errors', 0);
-
-// Clean all output buffers
-while (ob_get_level()) {
-    ob_end_clean();
-}
-
-// Start fresh output buffer
+while (ob_get_level()) ob_end_clean();
 ob_start();
-
-// Set headers
 header('Content-Type: application/xml; charset=utf-8');
 
-// Detect protocol and domain
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'];
 $domain = (strpos($host, 'ymhub.com') !== false || strpos($host, 'localhost') !== false) ? 'ymhub.com' : $host;
-
-// Check if we're in a subdirectory (like /ymhub)
 $current_dir = dirname($_SERVER['PHP_SELF']);
 $has_ymhub = strpos($current_dir, '/ymhub') !== false;
 $prefix = $has_ymhub ? '/ymhub' : '';
-
-// Base URL - remove trailing slash
 $base_url = rtrim($protocol . '://' . $domain . $prefix, '/');
-
-// Current date for lastmod
 $lastmod = date('Y-m-d');
 
-// Define pages with their priorities and change frequencies
 $pages = [
     ['url' => '/bm/', 'priority' => '1.0', 'changefreq' => 'weekly'],
     ['url' => '/en/', 'priority' => '1.0', 'changefreq' => 'weekly'],
@@ -43,41 +25,36 @@ $pages = [
     ['url' => '/en/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
 ];
 
-// Build XML content
-$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n";
+ob_clean();
+echo '<?xml version="1.0" encoding="UTF-8"?>', "\n";
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">', "\n";
 
 foreach ($pages as $page) {
     $url_path = $page['url'];
     $full_url = $base_url . $url_path;
-
-    $xml .= "  <url>\n";
-    $xml .= "    <loc>" . htmlspecialchars($full_url, ENT_XML1, 'UTF-8') . "</loc>\n";
-    $xml .= "    <lastmod>" . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8') . "</lastmod>\n";
-    $xml .= "    <changefreq>" . htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
-    $xml .= "    <priority>" . htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
-
-    // hreflang alternates
+    echo "  <url>\n";
+    echo "    <loc>", htmlspecialchars($full_url, ENT_XML1, 'UTF-8'), "</loc>\n";
+    echo "    <lastmod>", htmlspecialchars($lastmod, ENT_XML1, 'UTF-8'), "</lastmod>\n";
+    echo "    <changefreq>", htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8'), "</changefreq>\n";
+    echo "    <priority>", htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8'), "</priority>\n";
+    
     if (strpos($url_path, '/bm/') !== false) {
         $en_url = str_replace('/bm/', '/en/', $url_path);
         $bm_full_url = $base_url . $url_path;
         $en_full_url = $base_url . $en_url;
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        echo '    <xhtml:link rel="alternate" hreflang="ms" href="', htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8'), '" />', "\n";
+        echo '    <xhtml:link rel="alternate" hreflang="en" href="', htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8'), '" />', "\n";
     } elseif (strpos($url_path, '/en/') !== false) {
         $bm_url = str_replace('/en/', '/bm/', $url_path);
         $bm_full_url = $base_url . $bm_url;
         $en_full_url = $base_url . $url_path;
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
-        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        echo '    <xhtml:link rel="alternate" hreflang="ms" href="', htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8'), '" />', "\n";
+        echo '    <xhtml:link rel="alternate" hreflang="en" href="', htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8'), '" />', "\n";
     }
-
-    $xml .= "  </url>\n";
+    
+    echo "  </url>\n";
 }
 
-$xml .= "</urlset>\n";
-
-// Clean buffer and output XML
-ob_clean();
-echo $xml;
+echo '</urlset>', "\n";
+ob_end_flush();
 exit;
