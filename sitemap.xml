@@ -1,13 +1,18 @@
 <?php
 // Sitemap.xml generator for SEO
-// Suppress any errors/warnings and clean output
+// Turn off all error reporting and clean any output
 error_reporting(0);
-if (ob_get_level()) {
-    while (ob_get_level()) {
-        ob_end_clean();
-    }
+ini_set('display_errors', 0);
+
+// Clean all output buffers
+while (ob_get_level()) {
+    ob_end_clean();
 }
+
+// Start fresh output buffer
 ob_start();
+
+// Set headers
 header('Content-Type: application/xml; charset=utf-8');
 
 // Detect protocol and domain
@@ -39,8 +44,8 @@ $pages = [
 ];
 
 // Build XML content
-$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+$xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n";
 
 foreach ($pages as $page) {
     $url_path = $page['url'];
@@ -70,9 +75,9 @@ foreach ($pages as $page) {
     $xml .= "  </url>\n";
 }
 
-$xml .= '</urlset>';
+$xml .= "</urlset>\n";
 
-// Output all XML at once
+// Clean buffer and output XML
+ob_clean();
 echo $xml;
-// Flush output
-ob_end_flush();
+exit;
