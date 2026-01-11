@@ -3,7 +3,7 @@
 header('Content-Type: application/xml; charset=utf-8');
 
 // Base URL of your website
-$base_url = 'https://ymhub.com'; // Change if needed
+$base_url = 'https://ymhubtech.com'; // Change if needed
 
 // Current date
 $lastmod = date('Y-m-d');
