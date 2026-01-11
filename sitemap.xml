@@ -1,8 +1,11 @@
 <?php
 // Sitemap.xml generator for SEO
-// Clean any existing output and start buffering
+// Suppress any errors/warnings and clean output
+error_reporting(0);
 if (ob_get_level()) {
-    ob_end_clean();
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
 }
 ob_start();
 header('Content-Type: application/xml; charset=utf-8');
@@ -35,38 +38,41 @@ $pages = [
     ['url' => '/en/single-page', 'priority' => '0.7', 'changefreq' => 'monthly'],
 ];
 
-// Generate XML - output XML declaration properly
-echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n";
+// Build XML content
+$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
 
 foreach ($pages as $page) {
     $url_path = $page['url'];
     $full_url = $base_url . $url_path;
 
-    echo "  <url>\n";
-    echo "    <loc>" . htmlspecialchars($full_url, ENT_XML1, 'UTF-8') . "</loc>\n";
-    echo "    <lastmod>" . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8') . "</lastmod>\n";
-    echo "    <changefreq>" . htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
-    echo "    <priority>" . htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
+    $xml .= "  <url>\n";
+    $xml .= "    <loc>" . htmlspecialchars($full_url, ENT_XML1, 'UTF-8') . "</loc>\n";
+    $xml .= "    <lastmod>" . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8') . "</lastmod>\n";
+    $xml .= "    <changefreq>" . htmlspecialchars($page['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
+    $xml .= "    <priority>" . htmlspecialchars($page['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
 
     // hreflang alternates
     if (strpos($url_path, '/bm/') !== false) {
         $en_url = str_replace('/bm/', '/en/', $url_path);
         $bm_full_url = $base_url . $url_path;
         $en_full_url = $base_url . $en_url;
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
     } elseif (strpos($url_path, '/en/') !== false) {
         $bm_url = str_replace('/en/', '/bm/', $url_path);
         $bm_full_url = $base_url . $bm_url;
         $en_full_url = $base_url . $url_path;
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
-        echo "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"ms\" href=\"" . htmlspecialchars($bm_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
+        $xml .= "    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"" . htmlspecialchars($en_full_url, ENT_XML1, 'UTF-8') . "\" />\n";
     }
 
-    echo "  </url>\n";
+    $xml .= "  </url>\n";
 }
 
-echo '</urlset>';
+$xml .= '</urlset>';
+
+// Output all XML at once
+echo $xml;
 // Flush output
 ob_end_flush();
